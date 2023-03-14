@@ -17,7 +17,7 @@ st.sidebar.info(
     """
 )
 
-st.title("Heatmap")
+st.title("Heatmap of R&D Spending by State")
 
 with st.expander("See source code"):
     with st.echo():
