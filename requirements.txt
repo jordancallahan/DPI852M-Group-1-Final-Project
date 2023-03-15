@@ -1,4 +1,4 @@
-# cartopy
+cartopy
 folium==0.13.0
 geemap
 geopandas
@@ -17,5 +17,3 @@ streamlit-keplergl
 tropycal
 pandas
 numpy
-# git+https://github.com/giswqs/leafmap
-# git+https://github.com/giswqs/geemap
