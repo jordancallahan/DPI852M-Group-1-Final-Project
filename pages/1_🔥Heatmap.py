@@ -8,6 +8,7 @@ st.set_page_config(layout="wide")
 
 st.sidebar.info(
     """
+   
     - Web App URL: <insert home link here>
     - GitHub repository: <insert github link here>
     """
@@ -22,9 +23,15 @@ st.sidebar.info(
 
 st.title("Heatmap of R&D Spending by State")
 
+import pandas as pd
+
+filepath = "https://raw.githubusercontent.com/jordancallahan/DPI852M-Group-1-Final-Project/main/data/tables/R_and_D_by_state.csv"
+df = pd.read_csv(filepath)
+df = df.replace(",", "", regex=True).fillna("0")
+
 with st.expander("See source code"):
     with st.echo():
-        filepath = "https://raw.githubusercontent.com/jordancallahan/DPI852M-Group-1-Final-Project/Andrew/data/tables/R_and_D_by_state.csv"
+        filepath = df
         m = leafmap.Map(center=[40, -100], zoom=4, tiles="stamentoner")
 
         # Load the CSV data and preprocess the data
@@ -43,7 +50,7 @@ with st.expander("See source code"):
         m.add_heatmap(
             data=df,
             latitude="Latitude",
-            longitude="Longditude",
+            longitude="Longitude",
             value=selected_column,
             name="Heat map",
             radius=20,
@@ -58,7 +65,7 @@ m_animated = leafmap.Map(center=[40, -100], zoom=4, tiles="stamentoner")
 # Prepare the data for the time_slider_choropleth() function
 data = []
 for year in range(min_year, max_year + 1):
-    year_data = df[["State", "Latitude", "Longditude", str(year)]]
+    year_data = df[["State", "Latitude", "Longitude", str(year)]]
     year_data_dict = year_data.to_dict(orient="records")
     year_data_json = json.dumps(year_data_dict, ensure_ascii=False)
     data.append(OrderedDict({"time": str(year), "data": year_data_json}))
@@ -67,7 +74,7 @@ for year in range(min_year, max_year + 1):
 m_animated.time_slider_choropleth(
     data=data,
     latitude="Latitude",
-    longitude="Longditude",
+    longitude="Longitude",
     weight=str(year),
     time_interval=1000,
     auto_play=True,
@@ -78,7 +85,7 @@ m_animated.to_streamlit(height=700)
 
 
 st.markdown(
-    """
+       """
 From a national perspective, research and development (R&D) spending in the United States has experienced considerable growth between 2006 and 2021. This expansion can be attributed to various factors, including increased government investments, a growing emphasis on technological innovation, and the rise of private sector R&D efforts. The United States has maintained its position as one of the world's top spenders on R&D, with industries such as technology, pharmaceuticals, and aerospace driving much of this investment. Additionally, federal policies, tax incentives, and funding programs have played a crucial role in promoting research in both the public and private sectors. This continuous growth in R&D spending has helped to fuel advancements in technology, healthcare, and other areas, further solidifying the United States' position as a global leader in innovation.
 
 From a state-by-state perspective, there have been notable differences in R&D spending throughout the years. States with strong technology and research sectors, such as California, Massachusetts, and Washington, have consistently been at the forefront of R&D expenditure. These states benefit from the presence of major technology companies, prestigious research institutions, and a highly skilled workforce, which collectively contribute to their high levels of investment. In other states, such as Texas and North Carolina, R&D spending has also seen substantial growth, driven by factors such as the expansion of research universities, targeted economic development initiatives, and the growth of industries like biotechnology and renewable energy.
