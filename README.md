@@ -30,5 +30,5 @@ This is our repo for the Group 1 Project 2 Streamlit application for Advanced Da
 - Higher education in science and engineering (US) https://ncses.nsf.gov/indicators/reports [Sammy]
 - Innovation (US) https://ncses.nsf.gov/indicators/reports
 - K-12 Education (US) https://ncses.nsf.gov/indicators/reports [May]
-- Labor force (US) https://ncses.nsf.gov/indicators/reports
+- Labor force (US) https://ncses.nsf.gov/indicators/reports [Sammy]
 - Public attitudes (US) https://ncses.nsf.gov/indicators/reports [Andrew]
