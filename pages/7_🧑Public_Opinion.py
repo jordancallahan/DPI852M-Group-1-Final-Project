@@ -51,7 +51,7 @@ funding_chart.add_trace(go.Scatter(x=funding_data["Year"], y=funding_data["About
 funding_chart.add_trace(go.Scatter(x=funding_data["Year"], y=funding_data["Too much"], mode='lines+markers', name="Too much", marker_color='orange'))
 
 funding_chart.update_layout(title="Public Opinion on Federal Funding for Scientific Research (2006-2018)", xaxis_title="Year", yaxis_title="Percentage")
-
+st.plotly_chart(funding_chart)
 
 st.write("## Interest in S&T News (2006-2018)")
 
@@ -64,7 +64,7 @@ interest_data = pd.DataFrame({
 })
 
 # Line chart for Interest in S&T News (2006-2018)
-interest_chart = go.Figure(go.Scatter(x=interest_data["Year"], y=interest_data["Percentage"], mode='lines+markers', marker_color='purple'))
+interest_chart = go.Figure(go.Scatter(x=interest_data["Year"], y=interest_data["Percentage"], mode='lines+markers', marker_color='yellow'))
 interest_chart.update_layout(title="Interest in S&T News (2006-2018)", xaxis_title="Year", yaxis_title="Percentage")
 st.plotly_chart(interest_chart)
 
