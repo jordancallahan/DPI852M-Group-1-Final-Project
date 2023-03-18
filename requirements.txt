@@ -16,3 +16,4 @@ streamlit-keplergl
 tropycal
 pandas
 numpy
+openpyxl
