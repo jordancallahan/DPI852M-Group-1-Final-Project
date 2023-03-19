@@ -32,7 +32,7 @@ fig = px.choropleth(data, locations="State",
                     locationmode="USA-states",
                     scope="usa",
                     color_continuous_scale="blues",
-                    title="Spend between 2009 - 2021",
+                    title="Spend between 2009 - 2021 ($m)",
                     animation_frame="Year",
                     color="Spend",
                     range_color=[0, 30000000])
@@ -41,7 +41,19 @@ fig = px.choropleth(data, locations="State",
 #show map
 st.plotly_chart(fig)
 
+#per capita map
 
+fig = px.choropleth(data, locations="State",
+                    locationmode="USA-states",
+                    scope="usa",
+                    color_continuous_scale="reds",
+                    title="Spend between 2009 - 2021 per capita ($)",
+                    animation_frame="Year",
+                    color="Per Capita Spend",
+                    range_color=[0, 50])
+
+#show map
+st.plotly_chart(fig)
 
 st.markdown(
     """
