@@ -28,7 +28,7 @@ merged_data = us_counties.merge(per_capita_patents, on='Full Name', how='left')
 
 # Create a new column 'color_group' in the merged_data DataFrame
 merged_data['color_group'] = merged_data['Quintile'].apply(
-    lambda x: '0 (Greyed out)' if pd.isna(
+    lambda x: '0' if pd.isna(
         x) or x == 0 else f"Quintile {int(x)}"
 )
 

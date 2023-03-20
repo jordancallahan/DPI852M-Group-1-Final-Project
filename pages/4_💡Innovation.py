@@ -4,6 +4,7 @@ import plotly.express as px
 import numpy as np
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+import geopandas as gpd
 
 st.title("Measures of Innovation")
 
@@ -170,3 +171,47 @@ bar_chart.update_traces(hovertemplate="%{y:.0f}<extra></extra>")
 
 # Add chart to streamlit page
 st.plotly_chart(bar_chart, use_container_width=True)
+
+# Map of patents per 1000 residents by county
+st.write("## Patents per 1000 Residents by County")
+
+# Load data
+file_path = 'https://github.com/jordancallahan/DPI852M-Group-1-Final-Project/blob/kendrick-branch/data/figures/merged_data.geojson?raw=true'
+patent_geo_data = gpd.read_file(file_path)
+
+# Create the choropleth map
+map_plot = px.choropleth_mapbox(
+    patent_geo_data,
+    geojson=patent_geo_data.geometry,
+    locations=patent_geo_data.index,
+    color='color_group',
+    hover_name='County',
+    hover_data=['State', 'Patents', 'Population'],
+    category_orders={'color_group': [
+        '0', 'Quintile 1', 'Quintile 2', 'Quintile 3', 'Quintile 4']},
+    # Set lowest to grey and others as increasingly dark blue colors
+    color_discrete_map={
+        '0': '#d3d3d3',
+        'Quintile 1': '#FFFFC2',
+        'Quintile 2': '#37A9B8',
+        'Quintile 3': '#256AAA',
+        'Quintile 4': '#1C2182'
+    },
+    center={"lat": 37.0902, "lon": -95.7129},
+    mapbox_style="carto-positron",
+    zoom=3,
+    labels={'color_group': 'Patent Concentration'}
+)
+
+# Update the layout
+map_plot.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+
+# Adjust figure tooltip to show number of patents, population, and State
+map_plot.update_traces(
+    hovertemplate="<b>%{hovertext}</b><br><br>" +
+    "State: %{customdata[0]}<br>" +
+    "Population: %{customdata[2]}<br>" +
+    "Patents: %{customdata[1]}<br>"
+)
+
+st.plotly_chart(map_plot, use_container_width=True)
