@@ -188,14 +188,14 @@ map_plot = px.choropleth_mapbox(
     hover_name='County',
     hover_data=['State', 'Patents', 'Population'],
     category_orders={'color_group': [
-        '0', 'Quintile 1', 'Quintile 2', 'Quintile 3', 'Quintile 4']},
+        '0', 'Quartile 1', 'Quartile 2', 'Quartile 3', 'Quartile 4']},
     # Set lowest to grey and others as increasingly dark blue colors
     color_discrete_map={
         '0': '#d3d3d3',
-        'Quintile 1': '#FFFFC2',
-        'Quintile 2': '#37A9B8',
-        'Quintile 3': '#256AAA',
-        'Quintile 4': '#1C2182'
+        'Quartile 1': '#FFFFC2',
+        'Quartile 2': '#37A9B8',
+        'Quartile 3': '#256AAA',
+        'Quartile 4': '#1C2182'
     },
     center={"lat": 37.0902, "lon": -95.7129},
     mapbox_style="carto-positron",
