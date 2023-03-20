@@ -173,7 +173,7 @@ bar_chart.update_traces(hovertemplate="%{y:.0f}<extra></extra>")
 st.plotly_chart(bar_chart, use_container_width=True)
 
 # Map of patents per 1000 residents by county
-st.write("## Patents per 1000 Residents by County")
+st.write("## Patents per 1000 Residents by U.S. County")
 
 # Load data
 file_path = 'https://github.com/jordancallahan/DPI852M-Group-1-Final-Project/blob/kendrick-branch/data/figures/merged_data.geojson?raw=true'
@@ -189,7 +189,6 @@ map_plot = px.choropleth_mapbox(
     hover_data=['State', 'Patents', 'Population'],
     category_orders={'color_group': [
         '0', 'Quartile 1', 'Quartile 2', 'Quartile 3', 'Quartile 4']},
-    # Set lowest to grey and others as increasingly dark blue colors
     color_discrete_map={
         '0': '#d3d3d3',
         'Quartile 1': '#FFFFC2',
