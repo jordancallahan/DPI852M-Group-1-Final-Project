@@ -21,14 +21,14 @@ This is our repo for the Group 1 Project 2 Streamlit application for Advanced Da
 - [https://ncses.nsf.gov/pubs/nsb20225](https://ncses.nsf.gov/pubs/nsb20225)
 - [https://ncses.nsf.gov/pubs/nsb20221/u-s-and-global-stem-education-and-labor-force](https://ncses.nsf.gov/pubs/nsb20221/u-s-and-global-stem-education-and-labor-force)
 
-## Tabs 
+## Tabs
 
 (please put your name next to the one you are working on and the dataset you are using - feel free to add more and we dont need to do all the ones listed)
 
 - US Spending by state (interactive heat map or similar) [Andrew]
 - Global spending (interactive heat map or similar)
-- Higher education in science and engineering (US) https://ncses.nsf.gov/indicators/reports [Sammy]
-- Innovation (US) https://ncses.nsf.gov/indicators/reports
-- K-12 Education (US) https://ncses.nsf.gov/indicators/reports [May]
-- Labor force (US) https://ncses.nsf.gov/indicators/reports [Sammy]
-- Public attitudes (US) https://ncses.nsf.gov/indicators/reports [Andrew]
+- Higher education in science and engineering (US) [https://ncses.nsf.gov/indicators/reports](https://ncses.nsf.gov/indicators/reports) [Sammy]
+- Innovation (US) [https://ncses.nsf.gov/indicators/reports](https://ncses.nsf.gov/indicators/reports)
+- K-12 Education (US) [https://ncses.nsf.gov/indicators/reports](https://ncses.nsf.gov/indicators/reports) [May]
+- Labor force (US) [https://ncses.nsf.gov/indicators/reports](https://ncses.nsf.gov/indicators/reports) [Sammy]
+- Public attitudes (US) [https://ncses.nsf.gov/indicators/reports](https://ncses.nsf.gov/indicators/reports) [Andrew]
