@@ -193,6 +193,7 @@ folium.LayerControl().add_to(folium_map_2)
 
 # Streamlit app
 # Display the Folium map in Streamlit
+st.write("R&D Expenditures by Country (% of GDP) in 2020")
 folium_static(folium_map_2)
 st.plotly_chart(fig_1)
 st.plotly_chart(fig_2)
