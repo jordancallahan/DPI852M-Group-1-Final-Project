@@ -4,7 +4,6 @@ import plotly.express as px
 import geopandas as gpd
 import folium
 from folium.features import GeoJsonTooltip
-from folium.plugins import TimeSliderChoropleth
 from streamlit_folium import folium_static
 import pycountry
 
@@ -12,7 +11,9 @@ st.set_page_config(page_title="Global R&D Expenditures", layout="wide")
 
 st.markdown("# Global R&D Expenditures")
 st.sidebar.header("")
-st.write("This visualization shows the worldwide R&D expenditures by region.")
+st.write(
+    "This visualization shows the worldwide R&D expenditures by selected countries."
+)
 
 st.sidebar.info(
     """
@@ -48,6 +49,7 @@ df = df[df["TIME"] <= 2020]
 
 # Since the names don't match between datasets (e.g. "United States" vs "United States of America"),
 # we need to standardize the names
+@st.cache_data
 def standardize_country_name(name):
     try:
         # Convert the country name to the three-letter country code
@@ -61,6 +63,7 @@ def standardize_country_name(name):
 
 
 # Convert three-letter country code to country name
+@st.cache_data
 def alpha3_to_country_name(alpha3_code):
     country = pycountry.countries.get(alpha_3=alpha3_code)
     if country:
@@ -70,7 +73,7 @@ def alpha3_to_country_name(alpha3_code):
 
 
 # Add country name column to df
-df["name"] = df["LOCATION"].apply(alpha3_to_country_name)
+df["name"] = df["LOCATION"].apply(alpha3_to_country_name)  # type: ignore
 
 # Read the GeoJSON data for countries
 url_geojson = "https://raw.githubusercontent.com/python-visualization/folium/master/examples/data/world-countries.json"
@@ -84,6 +87,7 @@ merged_data = world_geojson.merge(df, left_on="name", right_on="name", how="left
 
 merged_data = merged_data.sort_values(by="TIME", ascending=True)
 
+# Total R&D Expenditures by Country
 # Filter the data by MEASURE: "MLN_USD"
 country_data_mln = merged_data[merged_data["MEASURE"] == "MLN_USD"]
 
@@ -109,6 +113,7 @@ fig_1.update_geos(
     coastlinecolor="Black",
 )
 
+# Percent of GDP R&D Expenditures by Country
 # Filter the data by MEASURE: "PC_GDP" and extract the required columns
 country_data_pc = merged_data[merged_data["MEASURE"] == "PC_GDP"]
 
@@ -139,13 +144,13 @@ fig_2.update_geos(
 data_2020 = country_data_pc[country_data_pc["TIME"] == 2020]
 
 # Create a new GeoDataFrame with the filtered data
-gdf_2020 = gpd.GeoDataFrame(data_2020, geometry=data_2020.geometry)
+gdf_2020 = gpd.GeoDataFrame(data_2020, geometry=data_2020.geometry)  # type: ignore
 
 # Convert the new GeoDataFrame to a GeoJSON object
 data_2020_geojson = gdf_2020.to_json()
 
 # Create a Folium map centered on the world
-folium_map = folium.Map(location=[0, 0], zoom_start=2)
+folium_map_2 = folium.Map(location=[50, -50], zoom_start=2)
 
 # Create a tooltip for the choropleth layer
 tooltip = GeoJsonTooltip(
@@ -172,27 +177,26 @@ chloropleth = folium.Choropleth(
     key_on="feature.properties.name",
     fill_color="YlGnBu",
     fill_opacity=0.7,
-    line_opacity=0.2,
+    line_opacity=0.2,  # type: ignore
     legend_name="R&D Expenditure (% of GDP)",
     # Add a title
     name="R&D Expenditure (% of GDP) in 2020",
-).add_to(folium_map)
+).add_to(folium_map_2)
 
 # Add tooltip to the choropleth layer
 chloropleth.geojson.add_child(tooltip)
 # Add a layer control element to the map
-chloropleth.add_to(folium_map)
+chloropleth.add_to(folium_map_2)
 
 # Add a layer control element to the map
-folium.LayerControl().add_to(folium_map)
+folium.LayerControl().add_to(folium_map_2)
 
 # Streamlit app
-# st.plotly_chart(fig_1)
+# Display the Folium map in Streamlit
+folium_static(folium_map_2)
 st.plotly_chart(fig_1)
 st.plotly_chart(fig_2)
 
-# Display the Folium map in Streamlit
-folium_static(folium_map)
 
 if __name__ == "__main__":
     st.write("Running Streamlit App")
