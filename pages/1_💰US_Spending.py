@@ -3,19 +3,6 @@ import pandas as pd
 import plotly.express as px
 
 
-st.sidebar.info(
-    """
-    - Web App URL: <insert home link here>
-    - GitHub repository: <insert github link here>
-    """
-)
-
-st.sidebar.title("Contact")
-st.sidebar.info(
-    """
-   Add team info here
-    """
-)
 
 # Load data
 data = pd.read_excel("data/tables/R_and_D_by_state.xlsx")
