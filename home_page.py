@@ -4,6 +4,7 @@ import pandas as pd
 import plotly.express as px
 import numpy as np
 
+st.set_page_config(layout="wide", page_title="R+D Expenditure - US and Worldwide")
 
 st.sidebar.info(
     """
@@ -16,12 +17,11 @@ st.sidebar.info(
 st.sidebar.title("Team Members")
 st.sidebar.info(
     """
-    Andrew Trzcinski\
-    Jordan Callahan\
-    Sammy Cervantes\
-    May Braverman\
-    Kendrick McDonald
-
+    * Andrew Trzcinski
+    * Jordan Callahan
+    * Sammy Cervantes
+    * May Braverman
+    * Kendrick McDonald
     """
 )
 
@@ -41,14 +41,9 @@ We're thrilled to have this opportunity to showcase our findings on this platfor
 
 giphy_url = "https://giphy.com/embed/f9NaK0iIjpY5Vm80a0"
 
-st.components.v1.html(f'<div style="display:flex; justify-content:center;"><iframe src="{giphy_url}" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>')
+st.components.v1.html(
+    f'<div style="display:flex; justify-content:center;"><iframe src="{giphy_url}" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>'
+)
 
 
 st.info("Click on the left sidebar menu to navigate through each topic.")
-
-
-
-
-
-
-

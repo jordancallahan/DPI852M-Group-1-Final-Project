@@ -2,50 +2,114 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+st.set_page_config(layout="wide")
 
+st.sidebar.info(
+    """
+    - Web App URL: <insert home link here>
+    - GitHub repository: <insert github link here>
+    """
+)
+
+st.sidebar.title("Contact")
+st.sidebar.info(
+    """
+   Add team info here
+    """
+)
 
 # Load data
 data = pd.read_excel("data/tables/R_and_D_by_state.xlsx")
 
 # Replace state names with their two-letter abbreviations
-state_abbr = {'Alabama': 'AL', 'Alaska': 'AK', 'Arizona': 'AZ', 'Arkansas': 'AR', 'California': 'CA', 'Colorado': 'CO', 'Connecticut': 'CT', 'Delaware': 'DE', 'Florida': 'FL', 'Georgia': 'GA', 'Hawaii': 'HI', 'Idaho': 'ID', 'Illinois': 'IL', 'Indiana': 'IN', 'Iowa': 'IA', 'Kansas': 'KS', 'Kentucky': 'KY', 'Louisiana': 'LA', 'Maine': 'ME', 'Maryland': 'MD', 'Massachusetts': 'MA', 'Michigan': 'MI', 'Minnesota': 'MN', 'Mississippi': 'MS', 'Missouri': 'MO', 'Montana': 'MT', 'Nebraska': 'NE', 'Nevada': 'NV', 'New Hampshire': 'NH', 'New Jersey': 'NJ', 'New Mexico': 'NM', 'New York': 'NY', 'North Carolina': 'NC', 'North Dakota': 'ND', 'Ohio': 'OH', 'Oklahoma': 'OK', 'Oregon': 'OR', 'Pennsylvania': 'PA', 'Rhode Island': 'RI', 'South Carolina': 'SC', 'South Dakota': 'SD', 'Tennessee': 'TN', 'Texas': 'TX', 'Utah': 'UT', 'Vermont': 'VT', 'Virginia': 'VA', 'Washington': 'WA', 'West Virginia': 'WV', 'Wisconsin': 'WI', 'Wyoming': 'WY'}
+state_abbr = {
+    "Alabama": "AL",
+    "Alaska": "AK",
+    "Arizona": "AZ",
+    "Arkansas": "AR",
+    "California": "CA",
+    "Colorado": "CO",
+    "Connecticut": "CT",
+    "Delaware": "DE",
+    "Florida": "FL",
+    "Georgia": "GA",
+    "Hawaii": "HI",
+    "Idaho": "ID",
+    "Illinois": "IL",
+    "Indiana": "IN",
+    "Iowa": "IA",
+    "Kansas": "KS",
+    "Kentucky": "KY",
+    "Louisiana": "LA",
+    "Maine": "ME",
+    "Maryland": "MD",
+    "Massachusetts": "MA",
+    "Michigan": "MI",
+    "Minnesota": "MN",
+    "Mississippi": "MS",
+    "Missouri": "MO",
+    "Montana": "MT",
+    "Nebraska": "NE",
+    "Nevada": "NV",
+    "New Hampshire": "NH",
+    "New Jersey": "NJ",
+    "New Mexico": "NM",
+    "New York": "NY",
+    "North Carolina": "NC",
+    "North Dakota": "ND",
+    "Ohio": "OH",
+    "Oklahoma": "OK",
+    "Oregon": "OR",
+    "Pennsylvania": "PA",
+    "Rhode Island": "RI",
+    "South Carolina": "SC",
+    "South Dakota": "SD",
+    "Tennessee": "TN",
+    "Texas": "TX",
+    "Utah": "UT",
+    "Vermont": "VT",
+    "Virginia": "VA",
+    "Washington": "WA",
+    "West Virginia": "WV",
+    "Wisconsin": "WI",
+    "Wyoming": "WY",
+}
 
-data['State'] = data['State'].map(state_abbr)
+data["State"] = data["State"].map(state_abbr)
 
 # Create chloroplet map
 st.title("R+D Spending by State Over Time")
-
-st.markdown(
-    """ Research and development (R&D) spending in the United States has experienced significant growth over the past decade. The National Science Foundation reported that R&D spending increased from 381 billion USD in 2009 to 624 billion USD in 2018, with steady growth seen across both the public and private sectors. This investment has been instrumental in driving technological advancements and innovation across a range of industries, including healthcare, energy, and technology. Our webpage examines R&D spending between 2009 and 2021, exploring trends at the state and per capita level using data from the National Science Foundation. Click [Here](https://ncses.nsf.gov/pubs/nsf23302) to learn more about the data set used.
-    """
+fig = px.choropleth(
+    data,
+    locations="State",
+    locationmode="USA-states",
+    scope="usa",
+    color_continuous_scale="blues",
+    title="Spend between 2009 - 2021 ($m)",
+    animation_frame="Year",
+    color="Spend",
+    range_color=[0, 30000000],
 )
 
-# Create chloroplet map
-fig = px.choropleth(data, locations="State",
-                    locationmode="USA-states",
-                    scope="usa",
-                    color_continuous_scale="blues",
-                    title="Spend between 2009 - 2021 ($m)",
-                    animation_frame="Year",
-                    color="Spend",
-                    range_color=[0, 30000000])
 
-
-#show map
+# show map
 st.plotly_chart(fig)
 
-#per capita map
+# per capita map
 
-fig = px.choropleth(data, locations="State",
-                    locationmode="USA-states",
-                    scope="usa",
-                    color_continuous_scale="reds",
-                    title="Spend between 2009 - 2021 per capita ($)",
-                    animation_frame="Year",
-                    color="Per Capita Spend",
-                    range_color=[0, 50])
+fig = px.choropleth(
+    data,
+    locations="State",
+    locationmode="USA-states",
+    scope="usa",
+    color_continuous_scale="reds",
+    title="Spend between 2009 - 2021 per capita ($)",
+    animation_frame="Year",
+    color="Per Capita Spend",
+    range_color=[0, 50],
+)
 
-#show map
+# show map
 st.plotly_chart(fig)
 
 st.markdown(
