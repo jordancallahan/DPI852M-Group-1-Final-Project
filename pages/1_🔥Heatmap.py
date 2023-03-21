@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-st.set_page_config(layout="wide")
 
 st.sidebar.info(
     """
@@ -28,6 +27,13 @@ data['State'] = data['State'].map(state_abbr)
 
 # Create chloroplet map
 st.title("R+D Spending by State Over Time")
+
+st.markdown(
+    """ Research and development (R&D) spending in the United States has experienced significant growth over the past decade. The National Science Foundation reported that R&D spending increased from 381 billion USD in 2009 to 624 billion USD in 2018, with steady growth seen across both the public and private sectors. This investment has been instrumental in driving technological advancements and innovation across a range of industries, including healthcare, energy, and technology. Our webpage examines R&D spending between 2009 and 2021, exploring trends at the state and per capita level using data from the National Science Foundation. Click [Here](https://ncses.nsf.gov/pubs/nsf23302) to learn more about the data set used.
+    """
+)
+
+# Create chloroplet map
 fig = px.choropleth(data, locations="State",
                     locationmode="USA-states",
                     scope="usa",

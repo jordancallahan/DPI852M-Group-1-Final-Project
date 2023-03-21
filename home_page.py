@@ -8,8 +8,9 @@ st.set_page_config(layout="wide")
 
 st.sidebar.info(
     """
-    - Web App URL: <insert web app details>
-    - GitHub repository: <https://github.com/jordancallahan/DPI852M-Group-1-Final-Project>
+   GitHub Repository: [Click Here](https://github.com/jordancallahan/DPI852M-Group-1-Final-Project)
+
+    Take a look behind the scenes at our code and data with the link above!
     """
 )
 
@@ -40,19 +41,7 @@ We're thrilled to have this opportunity to showcase our findings on this platfor
 
 st.info("Click on the left sidebar menu to navigate through each topic.")
 
-st.markdown(
-    """
-    We made this multi-page web app to vizually explore science and R&D spending - the project aims to consider questions such as:
-1.       How does science and R&D spending vary across different regions of the US and the world?
-2.       What are the trends in higher education in science and engineering?
-3.       What are the links between science and R&D spending with innovation?
-4.       What are the trends in K-12 education?
-5.       What influence has this had on the US labor force?
-6.       How have public attitudes changed towards science and technology spending?
 
-Much of this project was created using [streamlit](https://streamlit.io) and open-source mapping libraries, such as [leafmap](https://leafmap.org), [geemap](https://geemap.org)
-    """
-)
 
 
 
