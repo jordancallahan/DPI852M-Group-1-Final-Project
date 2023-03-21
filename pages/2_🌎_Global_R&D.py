@@ -8,6 +8,24 @@ st.markdown("# Global R&D Expenditures")
 st.sidebar.header("")
 st.write("This visualization shows the worldwide R&D expenditures by region.")
 
+st.sidebar.info(
+    """
+    - Web App [URL](TBU)
+    - GitHub [repository](https://github.com/jordancallahan/DPI852M-Group-1-Final-Project)
+    """
+)
+
+st.sidebar.title("Team Members")
+st.sidebar.info(
+    """
+    * Andrew Trzcinski
+    * Jordan Callahan
+    * Sammy Cervantes
+    * May Braverman
+    * Kendrick McDonald
+    """
+)
+
 df = pd.read_csv("data/tables/global_domestic_RD_spend.csv")
 
 # Drop the INDICATOR, SUBJECT, FREQUENCY, and Flag Codes columns
