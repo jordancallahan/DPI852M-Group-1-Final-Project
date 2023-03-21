@@ -8,7 +8,7 @@ import numpy as np
 st.title("Public Opinion on Science and Technology")
 
 st.write("This Streamlit app displays interactive data visualizations based on the research and data from the "
-         "[NSB 2020 Science and Engineering Indicators Report](https://ncses.nsf.gov/pubs/nsb20207/executive-summary), specifically from Chapter 7.")
+         "[NSB 2020 Science and Engineering Indicators Report](https://ncses.nsf.gov/pubs/nsb20207/executive-summary), specifically from Chapter 7 and uses data from 2006-2018 for multi-year graphs and 2018 for single-year graphs.")
 
 st.write("## Public Confidence in Leaders of Institutions (2018)")
 
