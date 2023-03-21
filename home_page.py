@@ -53,8 +53,3 @@ st.markdown(
 Much of this project was created using [streamlit](https://streamlit.io) and open-source mapping libraries, such as [leafmap](https://leafmap.org), [geemap](https://geemap.org)
     """
 )
-
-
-
-
-
