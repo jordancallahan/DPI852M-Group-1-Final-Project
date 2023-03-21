@@ -17,3 +17,4 @@ tropycal
 pandas
 numpy
 openpyxl
+streamlit_folium
