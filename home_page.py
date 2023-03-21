@@ -4,7 +4,6 @@ import pandas as pd
 import plotly.express as px
 import numpy as np
 
-st.set_page_config(layout="wide")
 
 st.sidebar.info(
     """
@@ -38,6 +37,12 @@ We believe in presenting our research in a way that everyone can understand, so 
 We're thrilled to have this opportunity to showcase our findings on this platform, and we hope you find our research and analysis interesting and informative. So go ahead, take a look around, and feel free to explore the data sets that we used to make our discoveries (please explore our GitHub too - that architecture was a fair amount of the project on its own!). Thanks for stopping by, and we hope you enjoy the website!
 """
 )
+
+
+giphy_url = "https://giphy.com/embed/f9NaK0iIjpY5Vm80a0"
+
+st.components.v1.html(f'<div style="display:flex; justify-content:center;"><iframe src="{giphy_url}" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>')
+
 
 st.info("Click on the left sidebar menu to navigate through each topic.")
 
