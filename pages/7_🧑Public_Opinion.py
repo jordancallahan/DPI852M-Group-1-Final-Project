@@ -12,7 +12,7 @@ st.write(
     "[NSB 2020 Science and Engineering Indicators Report](https://ncses.nsf.gov/pubs/nsb20207/executive-summary), specifically from Chapter 7."
 )
 
-st.write("## Public Confidence in Leaders of Institutions (2018)")
+st.write("## Public Confidence in Leaders of Institutions")
 
 st.write(
     "This chart shows the percentage of people expressing a great deal of confidence in leaders of various institutions, based on the 2018 General Social Survey."
@@ -55,7 +55,7 @@ st.write(
     "As shown in the chart, leaders of the scientific community rank highest in terms of public confidence, with 44% of respondents expressing a great deal of confidence in them. Congress ranks lowest, with only 8% of respondents expressing the same level of confidence."
 )
 
-st.write("## Public Opinion on Federal Funding for Scientific Research (2006-2018)")
+st.write("## Public Opinion on Federal Funding for Scientific Research")
 
 st.write(
     "The chart below shows public opinion on federal funding for scientific research between 2006 and 2018, based on the General Social Survey."
@@ -109,7 +109,7 @@ funding_chart.update_layout(
 )
 st.plotly_chart(funding_chart)
 
-st.write("## Interest in S&T News (2006-2018)")
+st.write("## Interest in S&T News")
 
 st.write(
     "This chart shows the percentage of people who report being very or moderately interested in news about science and technology from 2006 to 2018."
@@ -139,7 +139,7 @@ interest_chart.update_layout(
 )
 st.plotly_chart(interest_chart)
 
-st.write("## Views on the Promise and Concerns of Science and Technology (2018)")
+st.write("## Views on the Promise and Concerns of Science and Technology")
 
 st.write(
     "This chart shows the percentage of people who believe that the benefits of science and technology outweigh the potential harms or vice versa, based on the 2018 General Social Survey."
@@ -162,7 +162,7 @@ views_chart = px.pie(
 )
 st.plotly_chart(views_chart)
 
-st.write("## Public Understanding of the Scientific Method (2006-2018)")
+st.write("## Public Understanding of the Scientific Method")
 
 st.write(
     "This chart shows the percentage of people who were able to correctly identify the scientific method as 'testing ideas with evidence from experiments,' based on the General Social Survey from 2006 to 2018."
@@ -192,7 +192,7 @@ understanding_chart.update_layout(
 )
 st.plotly_chart(understanding_chart)
 
-st.write("## Opinion on Science's Effect on the Environment (2018)")
+st.write("## Opinion on Science's Effect on the Environment")
 
 st.write(
     "This chart displays the percentage of people who believe that science has made the environment better, has had no effect, or has made it worse. Data is based on the 2018 General Social Survey."
@@ -227,7 +227,7 @@ st.write(
     "According to the 2018 General Social Survey, 65% of respondents believe that science has made the environment better, while 17% think it has made the environment worse. A smaller group of 18% believe science has had no effect on the environment."
 )
 
-st.write("## Importance of Government Funding by Field (2018)")
+st.write("## Importance of Government Funding by Field")
 
 st.write(
     "This chart presents the percentage of people who think the government spends too little on various fields of research. Data is based on the 2018 General Social Survey."
@@ -262,7 +262,7 @@ st.write(
     "The 2018 General Social Survey data shows that a majority of respondents believe the government spends too little on health (70%) and environmental (62%) research. In contrast, a smaller percentage of respondents feel the same way about basic science (51%) and space exploration (33%)."
 )
 
-st.write("## Public Knowledge of Selected Scientific Facts (2018)")
+st.write("## Public Knowledge of Selected Scientific Facts")
 
 st.write(
     "This heatmap illustrates the percentage of correct responses by the public to various scientific questions. Data is based on the 2018 General Social Survey."
