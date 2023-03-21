@@ -8,12 +8,19 @@ import geopandas as gpd
 
 st.title("Measures of Innovation")
 
-# Title with hyperlink
-st.write("This Streamlit app displays data visualizations based on the research and data from "
-         "[The State of U.S. Science and Engineering 2022](https://ncses.nsf.gov/pubs/nsb20221/u-s-and-global-science-and-technology-capabilities),\
-            a report published by the National Science Foundation.")
+# Markdown section with hyperlink
+st.markdown(
+    """
+Measuring patent activity is a common way to measure innovation. Patents are "one way governments support invention by providing legal mechanisms for intellectual property protection," according to the National Science Foundation.
+Here, we've outlined patents at the international, national, and local levels, using data collected by the National Science Foundation.
+""")
 
-st.write("## Share of International Patents Granted by Country")
+st.subheader("Share of International Patents Granted by Country")
+
+st.markdown(
+    """
+First, we'll look at the share of international patents granted by country. A comparison beetween 2010 and 2020 demonstrate a shift in the nations leading in patent grants, with massive patent growth in China in particular.
+""")
 
 # Data
 patents = pd.read_excel(
@@ -76,7 +83,17 @@ polar_chart.update_layout(
 # Add chart to streamlit page
 st.plotly_chart(polar_chart, use_container_width=True)
 
-st.write("## U.S. Patent Office Grants")
+st.subheader("U.S. Patent Office Grants")
+
+st.markdown(
+    """
+The U.S. Patent and Trademark Office (USPTO) grants patents in the U.S. both to domestic and foreign inventors. 
+
+The chart below demonstrates that the overall number of patents granted by the office increased by 53 percent between 2010 and 2020.
+
+Looking at the breakdown of patent grants, we can also see that the share of patents granted to foreign inventors increased slightly, accounting for just over half the total number of patents granted in both years.
+
+""")
 
 uspto_data = pd.DataFrame(
     {'Year': [2010, 2020],
@@ -173,7 +190,16 @@ bar_chart.update_traces(hovertemplate="%{y:.0f}<extra></extra>")
 st.plotly_chart(bar_chart, use_container_width=True)
 
 # Map of patents per 1000 residents by county
-st.write("## Patents per 1000 Residents by U.S. County")
+st.subheader("Patents per 1000 Residents by U.S. County")
+
+st.markdown(
+    """
+    At the local level, we can visualize the number of patents per 1,000 residents in U.S. counties to see
+    which areas of the country feature high levels of innovation. The map below confirms well-known hubs of innovation
+    such as the San Francisco Bay Area and Boston feature many patent grants. But it also shows how other areas of the country,
+    like near the Great Lakes for instance, also have high levels of innovation.
+"""
+)
 
 # Load data
 file_path = 'https://github.com/jordancallahan/DPI852M-Group-1-Final-Project/blob/kendrick-branch/data/figures/merged_data.geojson?raw=true'
@@ -214,3 +240,11 @@ map_plot.update_traces(
 )
 
 st.plotly_chart(map_plot, use_container_width=True)
+
+st.markdown(
+    """
+    This Streamlit app displays data visualizations based on the research and data from 
+[The State of U.S. Science and Engineering 2022](https://ncses.nsf.gov/pubs/nsb20221/u-s-and-global-science-and-technology-capabilities), 
+a report published by the National Science Foundation.
+    """
+)
