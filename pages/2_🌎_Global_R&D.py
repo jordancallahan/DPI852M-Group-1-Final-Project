@@ -1,8 +1,12 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import geopandas as gpd
 import folium
+from folium.features import GeoJsonTooltip
+from folium.plugins import TimeSliderChoropleth
 from streamlit_folium import folium_static
+import pycountry
 
 st.set_page_config(page_title="Global R&D Expenditures", layout="wide")
 
@@ -33,17 +37,62 @@ df = pd.read_csv("data/tables/global_domestic_RD_spend.csv")
 # Drop the INDICATOR, SUBJECT, FREQUENCY, and Flag Codes columns
 df = df.drop(columns=["INDICATOR", "SUBJECT", "FREQUENCY", "Flag Codes"])
 
+# Convert the TIME column to int
+df["TIME"] = df["TIME"].astype(int)
+
+# Only go to 2020
+df = df[df["TIME"] <= 2020]
+
 # Data source: https://data.oecd.org/rd/gross-domestic-spending-on-r-d.htm
 
-# Filter the data by MEASURE: "MLN_USD" and extract the required columns
-country_data_mln = df[df["MEASURE"] == "MLN_USD"][["LOCATION", "TIME", "Value"]]
+
+# Since the names don't match between datasets (e.g. "United States" vs "United States of America"),
+# we need to standardize the names
+def standardize_country_name(name):
+    try:
+        # Convert the country name to the three-letter country code
+        alpha_3 = pycountry.countries.search_fuzzy(name)[0].alpha_3
+        # Convert the three-letter country code back to the official country name
+        country_name = pycountry.countries.get(alpha_3=alpha_3).name
+        return country_name
+    except LookupError:
+        # Return the original name if the country is not found
+        return name
+
+
+# Convert three-letter country code to country name
+def alpha3_to_country_name(alpha3_code):
+    country = pycountry.countries.get(alpha_3=alpha3_code)
+    if country:
+        return country.name
+    else:
+        return None
+
+
+# Add country name column to df
+df["name"] = df["LOCATION"].apply(alpha3_to_country_name)
+
+# Read the GeoJSON data for countries
+url_geojson = "https://raw.githubusercontent.com/python-visualization/folium/master/examples/data/world-countries.json"
+world_geojson = gpd.read_file(url_geojson)
+
+# Standardize names
+world_geojson["name"] = world_geojson["name"].apply(standardize_country_name)
+
+# Merge the GeoJSON data with the country_data DataFrame using the country_name column
+merged_data = world_geojson.merge(df, left_on="name", right_on="name", how="left")
+
+merged_data = merged_data.sort_values(by="TIME", ascending=True)
+
+# Filter the data by MEASURE: "MLN_USD"
+country_data_mln = merged_data[merged_data["MEASURE"] == "MLN_USD"]
 
 # Create the heatmap using Plotly
-fig = px.choropleth(
+fig_1 = px.choropleth(
     country_data_mln,
     locations="LOCATION",
     color="Value",
-    hover_name="LOCATION",
+    hover_name="name",
     color_continuous_scale="Viridis",
     scope="world",
     projection="natural earth",
@@ -52,15 +101,23 @@ fig = px.choropleth(
     title="R&D Expenditures by Country (Millions USD)",
 )
 
+# Update the layout properties of the figure
+fig_1.update_geos(
+    showcountries=True,
+    countrycolor="Black",
+    showcoastlines=True,
+    coastlinecolor="Black",
+)
+
 # Filter the data by MEASURE: "PC_GDP" and extract the required columns
-country_data_pc = df[df["MEASURE"] == "PC_GDP"][["LOCATION", "TIME", "Value"]]
+country_data_pc = merged_data[merged_data["MEASURE"] == "PC_GDP"]
 
 # Create the heatmap using Plotly
-fig2 = px.choropleth(
+fig_2 = px.choropleth(
     country_data_pc,
     locations="LOCATION",
     color="Value",
-    hover_name="LOCATION",
+    hover_name="name",
     color_continuous_scale="Viridis",
     scope="world",
     projection="natural earth",
@@ -69,93 +126,73 @@ fig2 = px.choropleth(
     title="R&D Expenditures by Country (Percent of GDP)",
 )
 
+# Update the layout properties of the figure
+fig_2.update_geos(
+    showcountries=True,
+    countrycolor="Black",
+    showcoastlines=True,
+    coastlinecolor="Black",
+)
+
 # Create the map using Folium
-# Read the GeoJSON data for countries
-url_geojson = "https://raw.githubusercontent.com/python-visualization/folium/master/examples/data/world-countries.json"
+# Look at 2020 only
+data_2020 = country_data_pc[country_data_pc["TIME"] == 2020]
 
-# Map the LOCATION column to the ISO_A3 column in the GeoJSON data
-# This is bugged out for now
-# country_data_mln["LOCATION"] = country_data_mln["LOCATION"].map(
-#     {
-#         "United States": "USA",
-#         "Canada": "CAN",
-#         "Mexico": "MEX",
-#         "Korea": "KOR",
-#         "Japan": "JPN",
-#         "China": "CHN",
-#         "Germany": "DEU",
-#         "France": "FRA",
-#         "United Kingdom": "GBR",
-#         "Italy": "ITA",
-#         "Spain": "ESP",
-#         "Netherlands": "NLD",
-#         "Belgium": "BEL",
-#         "Switzerland": "CHE",
-#         "Austria": "AUT",
-#         "Sweden": "SWE",
-#         "Norway": "NOR",
-#         "Finland": "FIN",
-#         "Denmark": "DNK",
-#         "Ireland": "IRL",
-#         "Luxembourg": "LUX",
-#         "Portugal": "PRT",
-#         "Greece": "GRC",
-#         "Iceland": "ISL",
-#         "Poland": "POL",
-#         "Czech Republic": "CZE",
-#         "Hungary": "HUN",
-#         "Slovak Republic": "SVK",
-#         "Slovenia": "SVN",
-#         "Estonia": "EST",
-#         "Latvia": "LVA",
-#         "Lithuania": "LTU",
-#         "Romania": "ROU",
-#         "Bulgaria": "BGR",
-#         "Cyprus": "CYP",
-#         "Malta": "MLT",
-#         "Turkey": "TUR",
-#         "Russian Federation": "RUS",
-#         "Ukraine": "UKR",
-#         "Belarus": "BLR",
-#         "Moldova": "MDA",
-#         "Armenia": "ARM",
-#         "Azerbaijan": "AZE",
-#         "Georgia": "GEO",
-#         "Kazakhstan": "KAZ",
-#         "Kyrgyz Republic": "KGZ",
-#         "Tajikistan": "TJK",
-#         "Turkmenistan": "TKM",
-#         "Uzbekistan": "UZB",
-#         "Bosnia and Herzegovina": "BIH",
-#         "Croatia": "HRV",
-#         "Montenegro": "MNE",
-#         "Serbia": "SRB",
-#         "Albania": "ALB",
-#     }
-# )
+# Create a new GeoDataFrame with the filtered data
+gdf_2020 = gpd.GeoDataFrame(data_2020, geometry=data_2020.geometry)
 
-# Create the base map
-m = folium.Map(location=[20, 0], zoom_start=2, tiles="cartodbpositron")
+# Convert the new GeoDataFrame to a GeoJSON object
+data_2020_geojson = gdf_2020.to_json()
 
-# Add the choropleth layer
-folium.Choropleth(
-    geo_data=url_geojson,
-    name="choropleth",
-    data=country_data_mln,
-    columns=["LOCATION", "Value"],
-    key_on="feature.id",
+# Create a Folium map centered on the world
+folium_map = folium.Map(location=[0, 0], zoom_start=2)
+
+# Create a tooltip for the choropleth layer
+tooltip = GeoJsonTooltip(
+    fields=["name", "Value"],
+    aliases=["Country", "R&D Expenditure (% of GDP)"],
+    localize=True,
+    sticky=False,
+    labels=True,
+    style="""
+        background-color: #F0EFEF;
+        border: 2px solid black;
+        border-radius: 3px;
+        box-shadow: 3px;
+    """,
+    max_width=800,
+)
+
+
+# Add a choropleth layer using the GeoJSON object
+chloropleth = folium.Choropleth(
+    geo_data=data_2020_geojson,
+    data=data_2020,
+    columns=["name", "Value"],
+    key_on="feature.properties.name",
     fill_color="YlGnBu",
     fill_opacity=0.7,
     line_opacity=0.2,
-    legend_name="R&D Expenditure (Million USD)",
-    highlight=True,
-    hover_name="LOCATION",
-).add_to(m)
+    legend_name="R&D Expenditure (% of GDP)",
+    # Add a title
+    name="R&D Expenditure (% of GDP) in 2020",
+).add_to(folium_map)
+
+# Add tooltip to the choropleth layer
+chloropleth.geojson.add_child(tooltip)
+# Add a layer control element to the map
+chloropleth.add_to(folium_map)
+
+# Add a layer control element to the map
+folium.LayerControl().add_to(folium_map)
 
 # Streamlit app
-st.plotly_chart(fig)
-st.plotly_chart(fig2)
-folium_static(m)
+# st.plotly_chart(fig_1)
+st.plotly_chart(fig_1)
+st.plotly_chart(fig_2)
+
+# Display the Folium map in Streamlit
+folium_static(folium_map)
 
 if __name__ == "__main__":
     st.write("Running Streamlit App")
