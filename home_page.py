@@ -4,24 +4,23 @@ import pandas as pd
 import plotly.express as px
 import numpy as np
 
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide", page_title="R+D Expenditure - US and Worldwide")
 
 st.sidebar.info(
     """
-    - Web App URL: <insert web app details>
-    - GitHub repository: <https://github.com/jordancallahan/DPI852M-Group-1-Final-Project>
+    - Web App [URL](TBU)
+    - GitHub [repository](https://github.com/jordancallahan/DPI852M-Group-1-Final-Project)
     """
 )
 
 st.sidebar.title("Team Members")
 st.sidebar.info(
     """
-    Andrew Trzcinski\
-    Jordan Callahan\
-    Sammy Cervantes\
-    May Braverman\
-    Kendrick McDonald
-
+    * Andrew Trzcinski
+    * Jordan Callahan
+    * Sammy Cervantes
+    * May Braverman
+    * Kendrick McDonald
     """
 )
 
