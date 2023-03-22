@@ -86,8 +86,10 @@ merged_data = world_geojson.merge(df, left_on="name", right_on="name", how="left
 
 merged_data = merged_data.sort_values(by="TIME", ascending=True)
 
-# Convert TIME back to an int
-merged_data["TIME"] = merged_data["TIME"].astype(int)
+# Convert TIME to int, ignoring NaN values
+merged_data["TIME"] = pd.to_numeric(
+    merged_data["TIME"], downcast="integer", errors="coerce"
+)
 
 # Total R&D Expenditures by Country
 # Filter the data by MEASURE: "MLN_USD"
