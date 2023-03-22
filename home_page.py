@@ -40,10 +40,10 @@ st.markdown(
     have utilized a wide variety of data visualization techniques (all in one simple
     webpage) to create visuals that will help convey our insights in a simple and
     accessible way. Our hope is that this will help policymakers or anyone interested
-    better understand the R+D spending landscape with these visuals. We have a mix of 
+    better understand science, technology, research, and development indicators with these visuals. We have a mix of 
     skillsets on the team, so we have also worked in a way that allowed for both 
     collaboration and comfort - helping eachother where we were able to and working 
-    on ways to harmonize multiple platforms.
+    on ways to harmonize multiple data wrangling platforms.
 
     We're thrilled to have this opportunity to showcase our findings on this platform,
     and we hope you find our research and analysis interesting and informative. So go
