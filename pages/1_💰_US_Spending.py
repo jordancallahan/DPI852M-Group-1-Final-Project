@@ -85,7 +85,7 @@ data["State"] = data["State"].map(state_abbr)
 # Create chloroplet map
 st.title("R+D Spending by State Over Time")
 st.markdown(
-    """ This chart examines the change in R+D spending over time at aggregate levels from state sources. 
+    """ The following chart examines the change in R+D spending over time at aggregate levels from state sources. 
     This is based on data from the National Science Foundation's [Survey of State Government Research and Development](https://www.nsf.gov/statistics/srvystaterd/)
     """
     )
@@ -108,7 +108,7 @@ st.plotly_chart(fig)
 
 # per capita map
 st.markdown(
-    """ This chart examines the change in R+D spending over time at per capita levels from state sources. 
+    """ This next chart examines the change in R+D spending over time at per capita levels from state sources. 
     This is based on data from the National Science Foundation's [Survey of State Government Research and Development](https://www.nsf.gov/statistics/srvystaterd/)
     """
     )
