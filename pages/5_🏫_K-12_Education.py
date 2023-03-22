@@ -3,9 +3,9 @@ import pandas as pd
 import plotly.express as px
 import streamlit.components.v1 as components
 
+st.set_page_config(layout="centered")
 
 st.title("Science and Technology in Education")
-
 
 st.sidebar.info(
     """

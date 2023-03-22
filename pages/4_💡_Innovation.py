@@ -8,6 +8,8 @@ import geopandas as gpd
 
 st.title("Measures of Innovation")
 
+st.set_page_config(layout="centered")
+
 st.sidebar.info(
     """
     - Web App [URL](https://dpi852m-group-1-final-project.streamlit.app/)
