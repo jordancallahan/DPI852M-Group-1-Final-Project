@@ -217,7 +217,7 @@ fig.add_trace(
 
 fig.update_layout(
     title="State support for higher education vs Average undergraduate charge at public 4-year institutions",
-    xaxis_title="Year",
+    xaxis_title="",
     legend=dict(orientation="h"),
 )
 
@@ -375,7 +375,7 @@ fig = px.bar(
     title="Representation of race or ethnicity in the U.S. population and among S&E degree recipients: 2019",
 )
 fig.update_layout(
-    xaxis_title="Percent",
+    xaxis_title="",
     yaxis_title="Selected Population",
     legend_title=None,
     legend=dict(orientation="h"),
