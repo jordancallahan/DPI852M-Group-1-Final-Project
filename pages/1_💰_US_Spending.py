@@ -84,6 +84,12 @@ data["State"] = data["State"].map(state_abbr)
 
 # Create chloroplet map
 st.title("R+D Spending by State Over Time")
+st.markdown(
+    """ This chart examines the change in R+D spending over time at aggregate levels from state sources. 
+    This is based on data from the National Science Foundation's [Survey of State Government Research and Development](https://www.nsf.gov/statistics/srvystaterd/)
+    """
+    )
+
 fig = px.choropleth(
     data,
     locations="State",
@@ -101,7 +107,11 @@ fig = px.choropleth(
 st.plotly_chart(fig)
 
 # per capita map
-
+st.markdown(
+    """ This chart examines the change in R+D spending over time at per capita levels from state sources. 
+    This is based on data from the National Science Foundation's [Survey of State Government Research and Development](https://www.nsf.gov/statistics/srvystaterd/)
+    """
+    )
 fig = px.choropleth(
     data,
     locations="State",
@@ -119,32 +129,29 @@ st.plotly_chart(fig)
 
 st.markdown(
     """
-From a national perspective, research and development (R&D) spending in the United
-States has experienced considerable growth between 2006 and 2021. This expansion can be
-attributed to various factors, including increased government investments, a growing
+From an overall national view, research and development (R&D) spending in the United
+States grew considerably between 2006 and 2021. This expansion is likely becuase of 
+various factors, including increased government investments, a growing
 emphasis on technological innovation, and the rise of private sector R&D efforts. The
-United States has maintained its position as one of the world's top spenders on R&D,
-with industries such as technology, pharmaceuticals, and aerospace driving much of this
-investment. Additionally, federal policies, tax incentives, and funding programs have
-played a crucial role in promoting research in both the public and private sectors.
-This continuous growth in R&D spending has helped to fuel advancements in technology,
-healthcare, and other areas, further solidifying the United States' position as a
-global leader in innovation.
+US has maintained its position as one of the world's top spenders on R&D,
+with industries such as technology, pharma, and aerospace driving much of this
+investment. Federal policies, tax incentives, and funding programs have
+played a central role in promoting research in both public and private remits.
 
-From a state-by-state perspective, there have been notable differences in R&D spending
-throughout the years. States with strong technology and research sectors, such as
-California, Massachusetts, and Washington, have consistently been at the forefront of
-R&D expenditure. These states benefit from the presence of major technology companies,
-prestigious research institutions, and a highly skilled workforce, which collectively
+From a state-by-state perspective, there have been noticable differences in R&D spending
+across the time period examined. States with strong technology and research sectors, such as
+California, Massachusetts, and Washington, have been at the forefront of
+R&D expenditure through this period. These states benefit from the presence of major technology companies,
+well-funded research institutions, and a high-skilled workforce, which all collectively
 contribute to their high levels of investment. In other states, such as Texas and North
-Carolina, R&D spending has also seen substantial growth, driven by factors such as the
-expansion of research universities, targeted economic development initiatives, and the
-growth of industries like biotechnology and renewable energy.
+Carolina, R&D spending has also seen snotworthy growth, driven by factors such as the
+expansion of universities, some targeted development initiatives, and the
+growth of sectors like biotechnology and renewable energy.
 
-However, not all states have experienced the same level of growth in R&D spending. Some
-states have faced economic challenges or have not been able to attract the same level
-of investment as others. Factors such as geographic location, the availability of
-skilled labor, and the presence of research-intensive industries can significantly
+That being said, not all states have experienced the same level of growth in this area. Some
+states have weathered economic challenges over this period or have not been able to attract the same level
+of investment. Factors such as geographic location, availability of
+skilled labor, and the volume of research-intensive industries can 
 impact a state's ability to increase R&D spending. Overall, the landscape of R&D
 spending in the United States between 2006 and 2021 has been one of both growth and
 disparity, with some states outpacing others in their pursuit of research-driven
