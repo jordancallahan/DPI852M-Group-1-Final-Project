@@ -19,3 +19,4 @@ numpy
 openpyxl
 streamlit_folium
 pycountry-convert
+libgdal-dev
