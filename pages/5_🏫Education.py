@@ -9,7 +9,7 @@ st.title("Science and Technology in Education")
 
 st.sidebar.info(
     """
-    - Web App [URL](TBU)
+    - Web App [URL](https://jordancallahan-dpi852m-group-1-final-project-home-page-ld7qtk.streamlit.app/)
     - GitHub [repository](https://github.com/jordancallahan/DPI852M-Group-1-Final-Project)
     """
 )
