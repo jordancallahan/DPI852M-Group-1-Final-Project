@@ -33,13 +33,13 @@ st.markdown(
     States and worldwide.
 
     We believe in presenting our research in a way that everyone can understand, so we
-    have utilized a wide variety data visualization techniques (all in one simple
+    have utilized a wide variety of data visualization techniques (all in one simple
     webpage) to create visuals that will help convey our insights in a simple and
     accessible way. Our hope is that this will help policymakers or anyone interested
-    in better understanding the R+D spending landscape can get a good introduction with
-    these visuals. We have a mix of skillsets on the team so have also worked in a way
-    that allowed for both collaboration and comfort - helping eachother where we we
-    able to and working on ways to harmonize multiple platforms.
+    better understand the R+D spending landscape with these visuals. We have a mix of 
+    skillsets on the team, so we have also worked in a way that allowed for both 
+    collaboration and comfort - helping eachother where we were able to and working 
+    on ways to harmonize multiple platforms.
 
     We're thrilled to have this opportunity to showcase our findings on this platform,
     and we hope you find our research and analysis interesting and informative. So go
