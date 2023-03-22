@@ -36,7 +36,7 @@ governments support invention by providing legal mechanisms for intellectual pro
 protection," according to the National Science Foundation.
 
 Here, we've outlined patents at the international, national, and local levels, using
-data collected by the National Science Foundation's data on [Invention, Knowledge Transfer, and Innovation](https://ncses.nsf.gov/pubs/nsb20204/invention-u-s-and-comparative-global-trends).
+data collected by the National Science Foundation's work on [Invention, Knowledge Transfer, and Innovation](https://ncses.nsf.gov/pubs/nsb20204/invention-u-s-and-comparative-global-trends).
 """
 )
 
