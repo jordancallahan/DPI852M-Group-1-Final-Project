@@ -1,6 +1,10 @@
 import streamlit as st
 
-st.set_page_config(layout="centered", page_title="R+D Expenditure - US and Worldwide")
+st.set_page_config(
+    layout="centered",
+    page_title="R+D Expenditure - US and Worldwide",
+    initial_sidebar_state="auto",
+)
 
 st.sidebar.info(
     """

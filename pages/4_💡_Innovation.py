@@ -6,9 +6,9 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import geopandas as gpd
 
-st.title("Measures of Innovation")
-
 st.set_page_config(layout="centered")
+
+st.title("Measures of Innovation")
 
 st.sidebar.info(
     """
