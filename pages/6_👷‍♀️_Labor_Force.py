@@ -3,6 +3,8 @@ import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
 
+st.set_page_config(layout="centered")
+
 st.title(
     "The STEM Labor Force of Today: Scientists, Engineers, and Skilled Technical Workers"
 )

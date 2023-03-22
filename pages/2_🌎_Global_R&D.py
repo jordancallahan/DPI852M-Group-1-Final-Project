@@ -7,7 +7,7 @@ from folium.features import GeoJsonTooltip
 from streamlit_folium import folium_static
 import pycountry
 
-st.set_page_config(page_title="Global R&D Expenditures", layout="wide")
+st.set_page_config(page_title="Global R&D Expenditures", layout="centered")
 
 st.markdown("# Global R&D Expenditures")
 st.write(
