@@ -14,7 +14,7 @@ st.set_page_config(page_title="Global R&D Expenditures", layout="centered")
 
 st.markdown("# Global R&D Expenditures")
 st.markdown(
-    """This following visualizationa show the R&D expenditures for OECD countries, using data 
+    """This following visualizations show the R&D expenditures for OECD countries, using data 
     from the OECD Library on [Science, Technology and R&D Statistics](https://www.oecd-ilibrary.org/science-and-technology/data/oecd-science-technology-and-r-d-statistics_strd-data-en)."""
 )
 
