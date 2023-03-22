@@ -10,7 +10,7 @@ st.title("Measures of Innovation")
 
 st.sidebar.info(
     """
-    - Web App [URL](https://jordancallahan-dpi852m-group-1-final-project-home-page-ld7qtk.streamlit.app/)
+    - Web App [URL](https://dpi852m-group-1-final-project.streamlit.app/)
     - GitHub [repository](https://github.com/jordancallahan/DPI852M-Group-1-Final-Project)
     """
 )
