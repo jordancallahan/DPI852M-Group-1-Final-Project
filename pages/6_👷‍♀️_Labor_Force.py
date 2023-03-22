@@ -28,7 +28,7 @@ st.sidebar.info(
 )
 
 st.write(
-    "This page displays interactive data visualizations based on the research and data from the "
+    "This page displays interactive data visualizations based on the research and data from "
     "[The State of U.S. Science and Engineering 2022](https://ncses.nsf.gov/pubs/nsb20221/u-s-and-global-stem-education-and-labor-force#demographic-composition-of-the-stem-workforce)"
 )
 
