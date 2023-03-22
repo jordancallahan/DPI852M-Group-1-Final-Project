@@ -10,7 +10,6 @@ import pycountry
 st.set_page_config(page_title="Global R&D Expenditures", layout="wide")
 
 st.markdown("# Global R&D Expenditures")
-st.sidebar.header("")
 st.write(
     "This visualization shows the worldwide R&D expenditures by selected countries."
 )
