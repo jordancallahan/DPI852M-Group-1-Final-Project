@@ -20,3 +20,4 @@ openpyxl
 streamlit_folium
 pycountry-convert
 libgdal-dev
+gdal-bin
