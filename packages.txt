@@ -1,3 +1,5 @@
 libgeos-dev
-libgdal-dev
 gdal-bin
+libgdal-grass
+python3-numpy-dbg
+python3-setuptools
