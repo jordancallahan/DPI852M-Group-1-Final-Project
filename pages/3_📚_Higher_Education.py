@@ -27,7 +27,7 @@ st.sidebar.info(
 )
 
 st.write(
-    "This Streamlit app displays interactive data visualizations based on the research and data from the "
+    "This page uses interactive data visualizations to explore the role of higher education based on the research and data from the "
     "[Higher Education in Science and Engineering](https://ncses.nsf.gov/pubs/nsb20223/executive-summary)"
 )
 
