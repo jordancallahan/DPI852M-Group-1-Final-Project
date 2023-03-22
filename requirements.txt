@@ -37,6 +37,3 @@ us==2.0.2
 # openpyxl
 # streamlit_folium
 # pycountry-convert
-# libgdal-dev
-# gdal-bin
-# branca
