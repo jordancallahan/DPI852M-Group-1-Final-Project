@@ -7,6 +7,9 @@ from folium.features import GeoJsonTooltip
 from streamlit_folium import folium_static
 import pycountry
 
+#####################################################################################
+# Page Setup
+
 st.set_page_config(page_title="Global R&D Expenditures", layout="centered")
 
 st.markdown("# Global R&D Expenditures")
@@ -31,6 +34,9 @@ st.sidebar.info(
     * Kendrick McDonald
     """
 )
+
+#####################################################################################
+# Data Wrangling
 
 df = pd.read_csv("data/tables/global_domestic_RD_spend.csv")
 
@@ -92,58 +98,13 @@ merged_data = merged_data.dropna()
 # Convert TIME to int
 merged_data["TIME"] = merged_data["TIME"].astype(int)
 
-# Total R&D Expenditures by Country
 # Filter the data by MEASURE: "MLN_USD"
 country_data_mln = merged_data[merged_data["MEASURE"] == "MLN_USD"]
 
-# Create the heatmap using Plotly
-fig_1 = px.choropleth(
-    country_data_mln,
-    locations="LOCATION",
-    color="Value",
-    hover_name="name",
-    color_continuous_scale="Viridis",
-    scope="world",
-    projection="natural earth",
-    animation_frame="TIME",
-    height=600,
-    title="R&D Expenditures by Country (Millions USD)",
-)
-
-# Update the layout properties of the figure
-fig_1.update_geos(
-    showcountries=True,
-    countrycolor="Black",
-    showcoastlines=True,
-    coastlinecolor="Black",
-)
-
-# Percent of GDP R&D Expenditures by Country
 # Filter the data by MEASURE: "PC_GDP" and extract the required columns
 country_data_pc = merged_data[merged_data["MEASURE"] == "PC_GDP"]
 
-# Create the heatmap using Plotly
-fig_2 = px.choropleth(
-    country_data_pc,
-    locations="LOCATION",
-    color="Value",
-    hover_name="name",
-    color_continuous_scale="Viridis",
-    scope="world",
-    projection="natural earth",
-    animation_frame="TIME",
-    height=600,
-    title="R&D Expenditures by Country (Percent of GDP)",
-)
-
-# Update the layout properties of the figure
-fig_2.update_geos(
-    showcountries=True,
-    countrycolor="Black",
-    showcoastlines=True,
-    coastlinecolor="Black",
-)
-
+#####################################################################################
 # Create the map using Folium
 # Look at 2020 only
 data_2020 = country_data_pc[country_data_pc["TIME"] == 2020]
@@ -196,13 +157,93 @@ chloropleth.add_to(folium_map_2)
 # Add a layer control element to the map
 folium.LayerControl().add_to(folium_map_2)
 
-# Streamlit app
-# Display the Folium map in Streamlit
 st.write("R&D Expenditures by Country (% of GDP) in 2020")
 folium_static(folium_map_2)
-st.plotly_chart(fig_1)
-st.plotly_chart(fig_2)
 
+#####################################################################################
+# Line chart of R&D Expenditures by Country over time
+# Filter the data by MEASURE: "PC_GDP" and extract the required columns
+line_data = country_data_pc[["name", "TIME", "Value"]]
+
+# Get a list of unique countries in the dataset
+country_list = line_data["name"].unique().tolist()
+country_list.sort()
+
+# Create a dropdown-like widget using a collapsible section and checkboxes
+expander = st.expander("Select Countries")
+selected_countries = []
+for country in country_list:
+    if expander.checkbox(country, value=True):
+        selected_countries.append(country)
+
+# Filter the data based on the selected countries
+filtered_line_data = line_data[line_data["name"].isin(selected_countries)]
+
+
+# Create a line chart
+fig_3 = px.line(filtered_line_data, x="TIME", y="Value", color="name")
+fig_3.update_layout(
+    title="R&D Expenditures as a Percentage of GDP by Country",
+    xaxis_title="Year",
+    yaxis_title="R&D Expenditures as a Percentage of GDP",
+    height=700,
+)
+
+st.plotly_chart(fig_3)
+
+#####################################################################################
+# Total R&D Expenditures by Country
+
+
+# Create the heatmap using Plotly
+fig_1 = px.choropleth(
+    country_data_mln,
+    locations="LOCATION",
+    color="Value",
+    hover_name="name",
+    color_continuous_scale="Viridis",
+    scope="world",
+    projection="natural earth",
+    animation_frame="TIME",
+    height=600,
+    title="R&D Expenditures by Country (Millions USD)",
+)
+
+# Update the layout properties of the figure
+fig_1.update_geos(
+    showcountries=True,
+    countrycolor="Black",
+    showcoastlines=True,
+    coastlinecolor="Black",
+)
+
+st.plotly_chart(fig_1)
+
+#####################################################################################
+# Percent of GDP R&D Expenditures by Country
+# Create the heatmap using Plotly
+fig_2 = px.choropleth(
+    country_data_pc,
+    locations="LOCATION",
+    color="Value",
+    hover_name="name",
+    color_continuous_scale="Viridis",
+    scope="world",
+    projection="natural earth",
+    animation_frame="TIME",
+    height=600,
+    title="R&D Expenditures by Country (Percent of GDP)",
+)
+
+# Update the layout properties of the figure
+fig_2.update_geos(
+    showcountries=True,
+    countrycolor="Black",
+    showcoastlines=True,
+    coastlinecolor="Black",
+)
+
+st.plotly_chart(fig_2)
 
 if __name__ == "__main__":
     st.write("Running Streamlit App")

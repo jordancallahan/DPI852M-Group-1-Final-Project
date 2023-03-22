@@ -743,5 +743,7 @@ fig.update_layout(height=700)
 st.plotly_chart(fig)
 
 st.write(
-    "The United States has been awarding the most S&E doctorates in the world for many years (41,000 in 2018). However, China is getting closer to catching up (40,000 in 2018)."
+    """The United States has been awarding the most S&E doctorates in the world for
+    many years (41,000 in 2018). However, China is getting closer to catching up
+    (40,000 in 2018)."""
 )
