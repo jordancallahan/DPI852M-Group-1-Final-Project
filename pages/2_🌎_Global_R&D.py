@@ -142,7 +142,7 @@ chloropleth = folium.Choropleth(
     data=data_2020,
     columns=["name", "Value"],
     key_on="feature.properties.name",
-    fill_color="YlGnBu",
+    fill_color="YlGn",
     fill_opacity=0.7,
     line_opacity=0.2,  # type: ignore
     legend_name="R&D Expenditure (% of GDP)",
@@ -158,7 +158,7 @@ chloropleth.add_to(folium_map_2)
 # Add a layer control element to the map
 folium.LayerControl().add_to(folium_map_2)
 
-st.write("R&D Expenditures by Country (% of GDP) in 2020")
+st.markdown("**R&D Expenditures by Country (% of GDP) in 2020**")
 folium_static(folium_map_2)
 
 #####################################################################################
@@ -171,7 +171,7 @@ country_list = line_data["name"].unique().tolist()
 country_list.sort()
 
 # Create a dropdown-like widget using a collapsible section and checkboxes
-expander = st.expander("Select Countries")
+expander = st.expander("Select Countries for Line Chart Below")
 selected_countries = []
 for country in country_list:
     if expander.checkbox(country, value=True):
