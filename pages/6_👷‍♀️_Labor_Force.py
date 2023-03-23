@@ -28,7 +28,7 @@ st.sidebar.info(
 )
 
 st.write(
-    "This Streamlit app displays interactive data visualizations based on the research and data from the "
+    "This page displays interactive data visualizations based on the research and data from "
     "[The State of U.S. Science and Engineering 2022](https://ncses.nsf.gov/pubs/nsb20221/u-s-and-global-stem-education-and-labor-force#demographic-composition-of-the-stem-workforce)"
 )
 
@@ -40,6 +40,7 @@ st.write(
     "This chart shows the proportion of occupations in the STEM fields, based on educational attainment."
 )
 
+# sankey
 nodes = [
     "STEM",
     "Bachelor's degree or higher",
@@ -109,6 +110,44 @@ jobs, 88% do not have a college degree.
 
 """
 )
+
+
+# choropleth map 
+
+data = pd.DataFrame({
+    'states' : ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'],
+    'categories' : ['STW', 'STW', 'None', 'None', 'STEM', 'STEM', 'STEM', 'None', 'STEM', 'None', 'None', 'None', 'None', 'STEM', 'STW', 'STW', 'STW', 'STW', 'None', 'None', 'STEM', 'STEM', 'None', 'STEM', 'STW', 'None', 'STEM', 'STW', 'None', 'STEM', 'STEM', 'None', 'None', 'None', 'STW', 'None', 'STW', 'STEM', 'None', 'None', 'None', 'STW', 'None', 'None', 'None', 'None', 'STEM', 'STEM', 'STW', 'None', 'STW']   
+
+})
+
+data.loc[data['categories'] == 'STW', 'categories'] = '15.1% to 16.1% of each state\'s workforce in STW'
+data.loc[data['categories'] == 'STEM', 'categories'] = '11.2% to 15.0 of each state\'s workforce with a BA in STEM'
+data.loc[data['categories'] == 'None', 'categories'] = 'States without high concentration of STEM workers'
+
+fig = px.choropleth(
+    data_frame=data,
+    locationmode='USA-states', 
+    locations='states',
+    color='categories', 
+    color_discrete_map={'11.2% to 15.0 of each state\'s workforce with a BA in STEM': 'purple', '15.1% to 16.1% of each state\'s workforce in STW': 'teal', 'States without high concentration of STEM workers': 'lightgrey'},
+    scope='usa', 
+    projection='albers usa', 
+    title='High concentration of STEM workers, by state: 2019'
+)
+
+fig.update_layout(legend_title = None, legend=dict(orientation="h"))
+fig.update_layout(height=600)
+
+st.plotly_chart(fig)
+
+st.write("""
+
+Since 2010, the growth rate of STEM jobs has surpassed that of non-STEM jobs, and it's anticipated that several STEM occupations 
+will continue to expand in the future. Nonetheless, the distribution of this projected growth across the United States might not be even. 
+In 2019, coastal states and the Midwest region had a higher percentage of STEM workers with a bachelor's degree or above in comparison to the 
+total workforce of each state. Conversely, states in the South and Midwest regions of the United States had a higher proportion of STW  in comparison.
+
+""")
 
 
 st.write("## Demographic Composition of the STEM Workforce")

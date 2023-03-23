@@ -37,6 +37,9 @@ st.markdown(
     various fields. Additionally, R&D spending can help to support science and
     technology education initiatives in schools, providing funding for equipment,
     resources, and training programs.
+    
+    The following graphs are based on data collected by the National Science Foundation 
+    on [Science and Engineering Indicators 2018](https://www.nsf.gov/statistics/2018/nsb20181/report/sections/elementary-and-secondary-mathematics-and-science-education/transition-to-higher-education).
     """
 )
 
